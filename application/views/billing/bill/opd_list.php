@@ -2,7 +2,6 @@
     <!--  table area -->
     <div class="col-sm-12">
         <div  class="panel panel-default thumbnail">
- 
             <div class="panel-body">
                 <table id="billList" class="table table-striped table-bordered" cellspacing="0" width="100%">
                     <thead>
