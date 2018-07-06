@@ -41,8 +41,6 @@ class Dashboard extends CI_Controller {
 
             if (!$check_user->row()) {
                 $check_user = $this->dashboard_model->check_patient($postData); 
-            } else {
-                //$check_user = $this->dashboard_model->check_user($postData); 
             }
 
             //print_r($check_user->row());exit;
