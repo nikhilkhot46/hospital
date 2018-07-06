@@ -1,0 +1,2 @@
+supplier_id,category_id,product_name,generic_name,box_size,product_location,price,supplier_price,unit,tax,product_model,product_details,image,box_size,expire_date,product_location, status
+QQ9POJWAB3IW4FCH163C,FMXU9KNIGKYI3TW,SampleMedicine,paracitamol,12,D_blook,200,150,Pcs,0.05,sap-107,This is csv product,http://localhost/pharmacy-v5_main_file/my-assets/image/product/06a60bd8c3bb1ad064ba9a6da3cd04e4.jpg,8,2018-10-20,B-Shelf,1
