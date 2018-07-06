@@ -32,7 +32,9 @@
                                 <td><?php echo $value->visiting_fees; ?></td>
                                 <td><?php echo date('d-m-Y', strtotime($value->date)); ?></td>
                                 <td class="center">
-                                    <a href="<?php echo base_url("prescription/prescription/view/$value->id") ?>" class="btn btn-xs btn-success"><i class="fa fa-eye"></i></a> 
+                                        <?php if(!$value->bill_id) btn_add("billing/bill/add_opd_bill/$value->patient_id/$value->appointment_id",display('add_opd_bill')) ?>
+                                        <?php btn_view("prescription/prescription/view/$value->id","View Prescription") ?>
+                                        <?php if($value->bill_id) btn_view("billing/bill/view_opd_bill/$value->bill_id/$value->appointment_id","View Bill") ?>
                                 </td>
                             </tr>
                         <?php 

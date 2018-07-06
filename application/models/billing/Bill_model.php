@@ -31,7 +31,7 @@ class Bill_model extends CI_Model {
 				$this->db->update('blood_sell', array("status"=>1,"bill_generated"=>1));
 			}else{
 				$this->db->where('appointment_id', $appointment_id);
-				$this->db->update('pr_prescription', array("status"=>0));
+				$this->db->update('pr_prescription', array("status"=>0,'bill_id'=>$data['bill_id']));
 			}
 		}
 		return $this->db->insert($this->table, $data);
@@ -206,18 +206,5 @@ class Bill_model extends CI_Model {
 			->from('setting')
 			->get()
 			->row();
-	}
-
-	public function read_opd_list($limit, $offset)
-	{ 
-		return $this->db->select("pr.*,CONCAT_WS(' ', u.firstname, u.lastname) AS doctor_name, pa.patient_id, CONCAT_WS(' ', pa.firstname, pa.lastname) AS patient_name")
-		->from("pr_prescription as pr")
-		->join("patient AS pa", "pa.patient_id = pr.patient_id", "left")
-		->join("user AS u", "u.user_id = pr.doctor_id", "left")
-		->limit($limit, $offset)
-		->order_by('pr.status desc')
-		->order_by('pr.id desc')
-		->get()
-		->result();
 	}
 }

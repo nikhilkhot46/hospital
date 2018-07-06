@@ -628,48 +628,6 @@ class Bill extends CI_Controller
 
 	}
 
-	public function opd_list()
-	{
-		$data['title'] = display('opd_list');
-        #-------------------------------#
-        #
-        #pagination starts
-        #
-		$config["base_url"] = base_url('billing/bill/opd_list');
-		$config["total_rows"] = $this->db->count_all('pr_prescription');
-		$config["per_page"] = 25;
-		$config["uri_segment"] = 4;
-		$config["last_link"] = "Last";
-		$config["first_link"] = "First";
-		$config['next_link'] = 'Next';
-		$config['prev_link'] = 'Prev';
-		$config['full_tag_open'] = "<ul class='pagination col-xs pull-right'>";
-		$config['full_tag_close'] = "</ul>";
-		$config['num_tag_open'] = '<li>';
-		$config['num_tag_close'] = '</li>';
-		$config['cur_tag_open'] = "<li class='disabled'><li class='active'><a href='#'>";
-		$config['cur_tag_close'] = "<span class='sr-only'></span></a></li>";
-		$config['next_tag_open'] = "<li>";
-		$config['next_tag_close'] = "</li>";
-		$config['prev_tag_open'] = "<li>";
-		$config['prev_tagl_close'] = "</li>";
-		$config['first_tag_open'] = "<li>";
-		$config['first_tagl_close'] = "</li>";
-		$config['last_tag_open'] = "<li>";
-		$config['last_tagl_close'] = "</li>";
-        /* ends of bootstrap */
-		$this->pagination->initialize($config);
-		$page = ($this->uri->segment(4)) ? $this->uri->segment(4) : 0;
-		$data['opd_list'] = $this->bill_model->read_opd_list($config["per_page"], $page);
-		$data["links"] = $this->pagination->create_links();
-        #
-        #pagination ends
-		#		
-		$data['content'] = $this->load->view('billing/bill/opd_list', $data, true);
-		$this->load->view('layout/main_wrapper', $data);
-	}
-
-
 	public function add_opd_bill($patient_id = null, $appointment_id = null)
 	{
 		$data['title'] = display('add_opd_bill');

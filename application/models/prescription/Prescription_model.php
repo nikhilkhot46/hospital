@@ -11,10 +11,11 @@ class Prescription_model extends CI_Model {
  
 	public function read()
 	{
-		return $this->db->select("pr_prescription.*, CONCAT_WS(' ', user.firstname, user.lastname) AS doctor_name")
-			->from('pr_prescription') 
-			->join('user', 'user.user_id = pr_prescription.doctor_id', 'left')
-			->order_by('id','desc')
+		return $this->db->select("pr.*, CONCAT_WS(' ', user.firstname, user.lastname) AS doctor_name")
+			->from('pr_prescription pr') 
+			->join('user', 'user.user_id = pr.doctor_id', 'left')	
+			->order_by('pr.status desc')
+			->order_by('pr.id desc')
 			->get()
 			->result();
 	} 
