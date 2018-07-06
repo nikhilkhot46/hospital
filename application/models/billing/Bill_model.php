@@ -4,10 +4,10 @@ class Bill_model extends CI_Model {
 
 	private $table = "bill";
  
-	public function create($data = [])
+	public function create($data = [],$appointment_id="")
 	{	 
 		if($data['status'] == 1){
-			if($data['admission_id']){
+			if(!empty($data['admission_id'])){
 				$this->load->model('patient_model');
 				$pid = $this->patient_model->read_by_patient_aid($data['admission_id']);
 				$ptid = $pid->patient_id;
@@ -30,7 +30,7 @@ class Bill_model extends CI_Model {
 				$this->db->where('admission_id', $data['admission_id']);
 				$this->db->update('blood_sell', array("status"=>1,"bill_generated"=>1));
 			}else{
-				$this->db->where('patient_id', $data['patient_id']);
+				$this->db->where('appointment_id', $appointment_id);
 				$this->db->update('pr_prescription', array("status"=>0));
 			}
 		}
@@ -96,7 +96,36 @@ class Bill_model extends CI_Model {
 			->where("bi.bill_id", $bill_id)
 			->get()
 			->row();
-	}  
+	}
+
+	public function opd_bill_by_id($bill_id = null)
+	{
+		return $this->db->select("
+				pa.patient_id AS patient_id,
+				CONCAT_WS(' ', pa.firstname, pa.lastname) AS patient_name,
+				pa.address AS address,
+				pa.date_of_birth AS date_of_birth,
+				pa.sex AS sex,
+				pa.picture AS picture,
+				CONCAT_WS(' ', dr.firstname, dr.lastname) AS doctor_name,
+				bi.id AS id,
+				bi.bill_id AS bill_id,
+				bi.bill_date AS bill_date,
+				bi.payment_method AS payment_method,
+				bi.card_cheque_no AS card_cheque_no,
+				bi.receipt_no AS receipt_no,
+				bi.discount AS discount,
+				bi.tax AS tax,
+				bi.note AS note,
+				bi.status AS status,
+			")
+			->from("bill AS bi")
+			->join("patient AS pa", "pa.patient_id = bi.patient_id", "left")
+			->join("pr_prescription AS pr", "pa.patient_id = pr.patient_id", "left")
+			->join("user AS dr", "dr.user_id = pr.doctor_id", "left")
+			->where("bi.bill_id", $bill_id)
+			->get()->row();
+	}
  
 
 	public function services_by_id($bill_id = null)

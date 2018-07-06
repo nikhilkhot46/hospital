@@ -36,7 +36,7 @@
                             </div>
                             <div class="col-xs-12 col-sm-12 col-md-6">
                                 <div class="form-group">
-                                    <input type="text" class="form-control" id="patient_name" placeholder="<?php echo display('patient_name') ?>" disabled/>
+                                    <input type="text" class="form-control" id="patient_name" name="patient_name" placeholder="<?php echo display('patient_name') ?>" readonly/>
                                 </div>
                             </div>
                             <div class="col-xs-12 col-sm-12 col-md-6">

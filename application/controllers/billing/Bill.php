@@ -169,8 +169,6 @@ class Bill extends CI_Controller
 		}
 	}
 
-
-
 	public function view($bill_id = null)
 	{
 		$data['title'] = display('bill_details');
@@ -181,9 +179,6 @@ class Bill extends CI_Controller
 		$data['content'] = $this->load->view('billing/bill/view', $data, true);
 		$this->load->view('layout/main_wrapper', $data);
 	}
-
-
-
 
 	public function edit($bill_id = null)
 	{
@@ -685,6 +680,7 @@ class Bill extends CI_Controller
 		$this->form_validation->set_rules('total', display('total'), 'required|max_length[11]');
 		$this->form_validation->set_rules('payment_method', display('payment_method'), 'required|max_length[255]');
 		$this->form_validation->set_rules('note', display('note'), 'max_length[1024]');
+		$this->form_validation->set_rules('patient_name', display('patient_name'), 'required');
 
 		#-------------------------------#
 		$bill_id = 'BL' . $this->randStrGen(2, 7);
@@ -708,7 +704,7 @@ class Bill extends CI_Controller
 		#-------------------------------#
 		if ($this->form_validation->run()) {
 
-			if ($this->bill_model->create($postData)) {
+			if ($this->bill_model->create($postData,$appointment_id)) {
 				#------------bill details--------------#
 				$sID = $this->input->post('service_id');
 				$sName = $this->input->post('service_name');
@@ -730,7 +726,7 @@ class Bill extends CI_Controller
 				$this->session->set_flashdata('message', display('save_successfully'));
 
 				if ($postData['status'] == 1) {
-					redirect("billing/bill/view/" . $postData['bill_id']);
+					redirect("billing/bill/view_opd_bill/" . $postData['bill_id'].'/'.$appointment_id);
 				}
 			} else {
 				$this->session->set_flashdata('exception', display('please_try_again'));
@@ -802,5 +798,15 @@ class Bill extends CI_Controller
 		echo json_encode($data);
 	}
 
+	public function view_opd_bill($bill_id = null, $apid = null)
+	{
+		$data['title'] = display('bill_details');
+		$data['apid'] = $apid;
+		$data['bill'] = $this->bill_model->opd_bill_by_id($bill_id);
+		$data['services'] = $this->bill_model->services_by_id($bill_id);
+		$data['website'] = $this->bill_model->website();
+		$data['content'] = $this->load->view('billing/bill/view_opd_bill', $data, true);
+		$this->load->view('layout/main_wrapper', $data);
+	}
 
 }
