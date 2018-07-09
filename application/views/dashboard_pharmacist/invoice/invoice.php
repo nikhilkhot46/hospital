@@ -27,7 +27,7 @@
                 
                   <a href="<?php echo base_url('dashboard_pharmacist/invoice/Cinvoice')?>" class="btn btn-info m-b-5 m-r-2"><i class="ti-plus"> </i> <?php echo display('new_invoice')?> </a>
 
-                  <a href="<?php echo base_url('dashboard_pharmacist/invoice/Cinvoice/pos_invoice')?>" class="btn btn-primary m-b-5 m-r-2"><i class="ti-align-justify"> </i>  <?php echo display('pos_invoice')?> </a>
+                  <!-- <a href="<?php echo base_url('dashboard_pharmacist/invoice/Cinvoice/pos_invoice')?>" class="btn btn-primary m-b-5 m-r-2"><i class="ti-align-justify"> </i>  <?php echo display('pos_invoice')?> </a> -->
 
             </div>
         </div>
@@ -127,7 +127,7 @@
 													<a href="<?php echo base_url().'dashboard_pharmacist/invoice/Cinvoice/invoice_inserted_data/'.$invoice['invoice_id']; ?>" class="btn btn-success btn-sm" data-toggle="tooltip" data-placement="left" title="<?php echo display('invoice') ?>"><i class="fa fa-window-restore" aria-hidden="true"></i></a>
 
 
-													<a href="<?php echo base_url().'dashboard_pharmacist/invoice/Cinvoice/pos_invoice_inserted_data/'.$invoice['invoice_id']; ?>" class="btn btn-warning btn-sm" data-toggle="tooltip" data-placement="left" title="<?php echo display('pos_invoice') ?>"><i class="fa fa-fax" aria-hidden="true"></i></a>
+													<!-- <a href="<?php echo base_url().'dashboard_pharmacist/invoice/Cinvoice/pos_invoice_inserted_data/'.$invoice['invoice_id']; ?>" class="btn btn-warning btn-sm" data-toggle="tooltip" data-placement="left" title="<?php echo display('pos_invoice') ?>"><i class="fa fa-fax" aria-hidden="true"></i></a> -->
 
 													<a href="<?php echo base_url().'dashboard_pharmacist/invoice/Cinvoice/invoice_update_form/'.$invoice['invoice_id']; ?>" class="btn btn-info btn-sm" data-toggle="tooltip" data-placement="left" title="<?php echo display('update') ?>"><i class="fa fa-pencil" aria-hidden="true"></i></a>
 
@@ -156,7 +156,7 @@
 	{	
 		var invoice_id=$(this).attr('name');
 		var csrf_test_name=  $("[name=csrf_test_name]").val();
-		var x = confirm("Are You Sure,Want to Delete ?");
+		var x = confirm('<?php echo display(("are_you_sure_to_delete")) ?>');
 		if (x==true){
 		$.ajax
 		   ({

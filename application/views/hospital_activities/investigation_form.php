@@ -22,6 +22,7 @@
                                 <label for="patient_id" class="col-xs-3 col-form-label"><?php echo display('patient_id') ?> <i class="text-danger">*</i></label>
                                 <div class="col-xs-9">
                                     <input name="patient_id"  type="text" class="form-control" id="patient_id" placeholder="<?php echo display('patient_id') ?>" value="<?php echo $investigation->patient_id ?>" >
+                                    <span class="text-danger"></span>
                                 </div>
                             </div>
 
@@ -104,7 +105,7 @@
 
 </div>
 <script>
-$.getJSON("<?php echo base_url('my-assets/js/admin_js/json/customer.json') ?>", function(data) {
+    $.getJSON("<?php echo base_url('my-assets/js/admin_js/json/customer.json') ?>", function(data) {
         $("#patient_id").autocomplete({
             source: data,
             minLength: 1,
@@ -112,6 +113,34 @@ $.getJSON("<?php echo base_url('my-assets/js/admin_js/json/customer.json') ?>", 
                 setTimeout(function(){
                     $("#patient_id").val(ui.item.value);
                 });
+            }
+        });
+    });
+    //check patient id
+    $('#patient_id').blur(function(){
+        var pid = $(this);
+
+        $.ajax({
+            url  : '<?= base_url('bed_manager/bed_assign/check_patient/') ?>',
+            type : 'post',
+            dataType : 'JSON',
+            data : {
+                '<?= $this->security->get_csrf_token_name(); ?>' : '<?= $this->security->get_csrf_hash(); ?>',
+                patient_id : pid.val()
+            },
+            success : function(data) 
+            {
+                if (data.status == true) {
+                    pid.next().text(data.message).addClass('text-success').removeClass('text-danger');
+                } else if (data.status == false) {
+                    pid.next().text(data.message).addClass('text-danger').removeClass('text-success');
+                } else {
+                    pid.next().text(data.message).addClass('text-danger').removeClass('text-success');
+                }
+            }, 
+            error : function()
+            {
+                alert('failed');
             }
         });
     });

@@ -98,12 +98,19 @@
                                 <div class="col-xs-9">
                                     <?= form_dropdown('site_align', array('LTR' => display('left_to_right'), 'RTL' => display('right_to_left')) ,$setting->site_align, 'class="form-control"') ?>
                                 </div>
-                            </div> 
+                            </div>
+
+                            <div class="form-group row">
+                                <label for="discount_type" class="col-xs-3 col-form-label"><?php echo display('discount') ?></label>
+                                <div class="col-xs-9">
+                                    <?= form_dropdown('discount_type', array('1' => display('discount_percentage'), '2' => display('discountperpcs'), '3' => display('fixed_dis')) ,$setting->discount_type, 'class="form-control"') ?>
+                                </div>
+                            </div>
 
                             <div class="form-group row">
                                 <label for="footer_text" class="col-xs-3 col-form-label"><?php echo display('footer_text') ?></label>
                                 <div class="col-xs-9">
-                                    <textarea name="footer_text" class="form-control"  placeholder="Footer Text" maxlength="140" rows="7"><?php echo $setting->footer_text ?></textarea>
+                                    <textarea name="footer_text" class="form-control"  placeholder="Footer Text" maxlength="140" rows="1"><?php echo $setting->footer_text ?></textarea>
                                 </div>
                             </div>  
 

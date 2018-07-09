@@ -6,7 +6,6 @@ class Dashboard extends CI_Controller {
     public function __construct()
     {
         parent::__construct();
-
         $this->load->model(array(
             'dashboard_model',
             'setting_model'
@@ -51,9 +50,7 @@ class Dashboard extends CI_Controller {
                         redirect('login');
                     }
                 }
-
                 //retrive setting data and store to session
-
                 //store data in session
                 $this->session->set_userdata([
                     'isLogIn'   => true,

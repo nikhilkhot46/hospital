@@ -172,15 +172,15 @@ function json_change_key($arr, $oldkey, $newkey) {
                                         <th class="text-center" style="width: 220px"><?php echo display('item_information') ?> <i class="text-danger">*</i></th>
                                         <th class="text-center" width="130"><?php echo display('batch_id') ?></th>
                                         <th class="text-center"><?php echo display('available_qnty') ?></th>
-                                        <th class="text-center" width="120"><?php echo display('expire_date') ?></th>
+                                        <th class="text-center" style="width:70px"><?php echo display('expire_date') ?></th>
                                         <th class="text-center"><?php echo display('unit') ?></th>
                                         <th class="text-center"><?php echo display('quantity') ?> <i class="text-danger">*</i></th>
-                                        <th class="text-center"><?php echo display('rate') ?> <i class="text-danger">*</i></th>
+                                        <th class="text-center" style="width:70px"><?php echo display('rate') ?> <i class="text-danger">*</i></th>
 
                                         <?php if ($discount_type == 1) { ?>
-                                        <th class="text-center"><?php echo display('discount_percentage') ?> %</th>
+                                        <th class="text-center"><?php echo display('discount_percentage') ?></th>
                                         <?php }elseif($discount_type == 2){ ?>
-                                        <th class="text-center"><?php echo display('discount') ?> </th>
+                                        <th class="text-center"><?php echo display('discountperpcs') ?> </th>
                                         <?php }elseif($discount_type == 3) { ?>
                                         <th class="text-center"><?php echo display('fixed_dis') ?> </th>
                                         <?php } ?>
@@ -200,7 +200,7 @@ function json_change_key($arr, $oldkey, $newkey) {
                                             <input type="hidden" class="baseUrl" value="<?php echo base_url();?>" />
                                         </td>
                                         <td>
-                                            <select class="form-control dont-select-me" id="batch_id_1" name="batch_id[]" required onchange="product_stock(1)">
+                                            <select class="form-control " id="batch_id_1" name="batch_id[]" required onchange="product_stock(1)">
                                                 <option></option>
                                             </select>     
                                         </td>

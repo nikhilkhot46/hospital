@@ -38,7 +38,7 @@ class Cinvoice extends CI_Controller {
 	}
 
 	//invoice Update Form
-public function invoice_update_form($invoice_id)
+	public function invoice_update_form($invoice_id)
 	{	
 		$CI =& get_instance();
 		$CI->load->library('linvoice');
@@ -47,7 +47,6 @@ public function invoice_update_form($invoice_id)
 		$this->load->view('dashboard_pharmacist/main_wrapper',$data);
 	}
 
-	
 	// invoice Update
 	public function invoice_update()
 	{
@@ -310,12 +309,11 @@ public function insert_pos_invoice()
 	public function invoice_delete()
 	{	
 		$CI =& get_instance();
-		$this->auth->check_admin_auth();
 		$CI->load->model('Invoices');
 		$invoice_id =  $_POST['invoice_id'];
 		$result = $CI->Invoices->delete_invoice($invoice_id);
 		if ($result) {
-			$this->session->set_userdata(array('message'=>display('successfully_delete')));
+			$this->session->set_userdata(array('message'=>display('delete_successfully')));
 			return true;
 		}	
 	}
@@ -366,5 +364,19 @@ public function insert_pos_invoice()
 			$con="$con"."$rand_number";}
 		}
 		return $con;
+	}
+
+
+	public function prescription_invoice($app_id)
+	{
+		$this->load->model('prescription/prescription_model');
+		
+		$data['title'] = display('prescription_information');
+		#-------------------------------#
+		$data['prescription'] = $this->prescription_model->single_view($app_id);
+		$currency_details = $this->Setting_model->retrieve_setting_editdata();
+		$data['discount_type'] = $currency_details[0]['discount_type'];
+		$data['content']  = $this->load->view('dashboard_pharmacist/invoice/add_prescription_invoice_form',$data,true);
+		$this->load->view('dashboard_pharmacist/main_wrapper',$data);
 	}
 }

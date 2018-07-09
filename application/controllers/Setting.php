@@ -91,6 +91,7 @@ class Setting extends CI_Controller {
 			'favicon' 	  => (!empty($favicon)?$favicon:$this->input->post('old_favicon')),
 			'language'    => $this->input->post('language'), 
 			'time_zone'   => $this->input->post('time_zone'), 
+			'discount_type'   => $this->input->post('discount_type'), 
 			'site_align'  => $this->input->post('site_align'), 
 			'currency'   => $this->input->post('currency'), 
 			'currency_position'  => $this->input->post('currency_position'), 
@@ -133,8 +134,6 @@ class Setting extends CI_Controller {
 				'currency_position'  => $postData['currency_position'], 
 			]);
 
-			//print_r($postData);
-			//exit;
 			redirect('setting');
 
 		} else { 
@@ -151,8 +150,8 @@ class Setting extends CI_Controller {
 			$this->db->insert('setting',[
 				'title' => 'Demo Hospital Limited',
 				'description' => '123/A, Street, State-12345, Demo',
-				'time_zone' => 'Asia/Dhaka',
-				'footer_text' => '2016&copy;Copyright',
+				'time_zone' => 'Asia/Pune',
+				'footer_text' => '2017&copy;Copyright',
 			]);
 		}
 	}

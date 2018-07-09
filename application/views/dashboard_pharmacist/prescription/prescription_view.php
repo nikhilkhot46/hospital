@@ -5,7 +5,8 @@
  
             <div class="panel-heading no-print">
                 <div class="btn-group"> 
-                    <a class="btn btn-primary" href="<?php echo base_url("dashboard_pharmacist/prescription/prescription") ?>"> <i class="fa fa-list"></i>  <?php echo display('prescription_list') ?> </a>  
+                    <a class="btn btn-primary" href="<?php echo base_url("dashboard_pharmacist/prescription/prescription") ?>"> <i class="fa fa-list"></i> <?php echo display('prescription_list') ?> </a>  
+                    <!-- <a class="btn btn-primary" href="<?php echo base_url("dashboard_pharmacist/invoice/Cinvoice/prescription_invoice/$prescription->id") ?>"> <i class="ti-layout-accordion-list"></i> <?php echo display('create_new_invoice') ?> </a>   -->
                     <button type="button" onclick="printContent('PrintMe')" class="btn btn-danger" ><i class="fa fa-print"></i></button> 
                 </div>
             </div> 
